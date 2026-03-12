@@ -4,6 +4,8 @@ import "./App.css";
 import Login from "./pages/Login";
 import Questionnaire from "./pages/Questionnaire";
 import Home from "./pages/Home";
+import Matches from "./pages/Matches";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -11,7 +13,19 @@ export default function App() {
     <BrowserRouter>
       <div className="app-container">
         <Routes>
+
+          {/* Public Route */}
           <Route path="/" element={<Login />} />
+
+          {/* Protected Routes */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/questionnaire"
@@ -23,13 +37,23 @@ export default function App() {
           />
 
           <Route
-            path="/home"
+            path="/matches"
             element={
               <ProtectedRoute>
-                <Home />
+                <Matches />
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
       </div>
     </BrowserRouter>

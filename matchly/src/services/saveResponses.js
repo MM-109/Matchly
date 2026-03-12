@@ -1,27 +1,41 @@
 import { db } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { fetchSubmissions } from "./jotform";
 
-export async function syncResponses() {
-  const submissions = await fetchSubmissions();
+function getUidFromAnswers(answers) {
+  if (!answers) return null;
+
+  const allAnswers = Object.values(answers);
+  const uidField = allAnswers.find((item) => item?.name === "uid");
+
+  return uidField?.answer || null;
+}
+
+export async function syncResponsesToFirestore() {
+  const submissions = await fetchSubmissions(50);
+
+  let written = 0;
 
   for (const sub of submissions) {
-    const answers = sub.answers;
-
-    const uid = answers?.uid?.answer;
+    const answers = sub.answers || {};
+    const uid = getUidFromAnswers(answers);
 
     if (!uid) continue;
 
     await setDoc(
-      doc(db, "questionnaires", uid),
+      doc(db, "questionnaires", String(uid)),
       {
-        uid: uid,
-        answers: answers,
-        submittedAt: new Date()
+        uid: String(uid),
+        jotformSubmissionId: String(sub.id || ""),
+        createdAt: sub.created_at || null,
+        updatedAt: serverTimestamp(),
+        answersJson: JSON.stringify(answers),
       },
       { merge: true }
     );
+
+    written++;
   }
 
-  console.log("Responses synced");
+  return { totalFetched: submissions.length, written };
 }
