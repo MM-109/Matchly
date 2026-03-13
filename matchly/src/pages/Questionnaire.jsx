@@ -43,33 +43,54 @@ export default function Questionnaire() {
   };
 
   return (
-    <div>
+    <div className="matches-container">
       <NavBar />
 
-      <div style={{ padding: 24, textAlign: "center" }}>
+      <div className="home-content">
         <h1>Questionnaire</h1>
 
         {loading ? (
-          <p>Loading questionnaire status...</p>
-        ) : hasQuestionnaire ? (
-          <>
-            <p>Your questionnaire has already been completed.</p>
-            <p style={{ opacity: 0.8 }}>
-              You can retake the questionnaire anytime to update your answers.
-            </p>
-
-            <button onClick={openSurvey} style={{ marginTop: 16 }}>
-              Retake Questionnaire
-            </button>
-          </>
+          <p className="home-subtitle">Loading questionnaire status...</p>
         ) : (
-          <>
-            <p>Please complete the survey to continue.</p>
-
-            <button onClick={openSurvey} style={{ marginTop: 16 }}>
-              Start Survey
-            </button>
-          </>
+          <div className="home-card-wrapper" style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '2rem' }}>
+            <div className="match-card" style={{ maxWidth: '500px', textAlign: 'center', padding: '3rem' }}>
+              
+              {hasQuestionnaire ? (
+                <>
+                  {/* "Profile Active" badge has been removed from here */}
+                  <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'white' }}>
+                    Already Completed
+                  </h2>
+                  <p style={{ color: 'var(--text-dim)', lineHeight: '1.6', marginBottom: '2.5rem' }}>
+                    Your questionnaire has already been completed. You can retake it anytime to update your answers.
+                  </p>
+                  <button className="add-match-btn" onClick={openSurvey}>
+                    Retake Questionnaire
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'white' }}>
+                    Ready to Start?
+                  </h2>
+                  <p style={{ color: 'var(--text-dim)', lineHeight: '1.6', marginBottom: '2.5rem' }}>
+                    Please complete the survey to help us find your perfect matches.
+                  </p>
+                  <button className="add-match-btn" onClick={openSurvey}>
+                    Start Survey
+                  </button>
+                </>
+              )}
+              
+              <button 
+                className="logout-btn" 
+                style={{ flex: 'none', width: '100%', borderRadius: '12px', padding: '0.8rem', marginTop: '12px' }}
+                onClick={() => navigate("/home")}
+              >
+                Back to Dashboard
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>
