@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Questionnaire from "./pages/Questionnaire";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
+import Offers from "./pages/Offers";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -13,11 +14,8 @@ export default function App() {
     <BrowserRouter>
       <div className="app-container">
         <Routes>
-
-          {/* Public Route */}
           <Route path="/" element={<Login />} />
 
-          {/* Protected Routes */}
           <Route
             path="/home"
             element={
@@ -46,6 +44,15 @@ export default function App() {
           />
 
           <Route
+            path="/offers"
+            element={
+              <ProtectedRoute>
+                <Offers />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
@@ -53,7 +60,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-
         </Routes>
       </div>
     </BrowserRouter>

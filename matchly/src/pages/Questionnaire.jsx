@@ -1,14 +1,35 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../services/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../services/firebase";
 import NavBar from "../components/NavBar";
 
 export default function Questionnaire() {
   const navigate = useNavigate();
   const user = auth.currentUser;
 
+  const [loading, setLoading] = useState(true);
+  const [hasQuestionnaire, setHasQuestionnaire] = useState(false);
+
   useEffect(() => {
-    if (!user) navigate("/");
+    const checkQuestionnaire = async () => {
+      if (!user) {
+        navigate("/");
+        return;
+      }
+
+      try {
+        const docRef = doc(db, "questionnaires", user.uid);
+        const docSnap = await getDoc(docRef);
+        setHasQuestionnaire(docSnap.exists());
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkQuestionnaire();
   }, [user, navigate]);
 
   const formUrl = useMemo(() => {
@@ -25,24 +46,30 @@ export default function Questionnaire() {
     <div>
       <NavBar />
 
-      <div style={{ padding: 24 }}>
+      <div style={{ padding: 24, textAlign: "center" }}>
         <h1>Questionnaire</h1>
-        <p>Please complete the survey to continue.</p>
 
-        {user ? (
+        {loading ? (
+          <p>Loading questionnaire status...</p>
+        ) : hasQuestionnaire ? (
           <>
-            <p style={{ opacity: 0.8, marginTop: 12 }}>
-              Your UID (saved with the form): <strong>{user.uid}</strong>
+            <p>Your questionnaire has already been completed.</p>
+            <p style={{ opacity: 0.8 }}>
+              You can retake the questionnaire anytime to update your answers.
             </p>
 
-            <button onClick={openSurvey} style={{ marginTop: 12 }}>
-              Start Survey
+            <button onClick={openSurvey} style={{ marginTop: 16 }}>
+              Retake Questionnaire
             </button>
           </>
         ) : (
-          <p style={{ color: "salmon" }}>
-            You must be logged in to take the survey.
-          </p>
+          <>
+            <p>Please complete the survey to continue.</p>
+
+            <button onClick={openSurvey} style={{ marginTop: 16 }}>
+              Start Survey
+            </button>
+          </>
         )}
       </div>
     </div>
