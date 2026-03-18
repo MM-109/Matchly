@@ -1,0 +1,171 @@
+:root {
+  --primary: #7b5cff;      /* soft purple */
+  --secondary: #5ecbff;    /* sky blue */
+  --accent: #caa8ff;       /* light lavender */
+  --background: #f9f9ff;   /* soft white */
+  --card-bg: #ffffff;
+  --text: #2d2d2d;
+  --text-light: #6b6b6b;
+  --border: #e6e6ff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f9f9ff, #eef3ff);
+  color: var(--text);
+}
+
+h1, h2, h3 {
+  color: var(--primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(123, 92, 255, 0.15);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(94, 203, 255, 0.25);
+}
+
+.button {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+/* Primary */
+.button-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.button-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Outline */
+.button-outline {
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+}
+
+.button-outline:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  outline: none;
+  transition: 0.3s;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(123, 92, 255, 0.2);
+}
+
+.match-card {
+  text-align: center;
+  padding: 25px;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.match-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--secondary);
+}
+
+.match-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.match-bio {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.match-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(123,92,255,0.3);
+}
+
+.heart {
+  color: var(--accent);
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.heart:hover {
+  color: var(--primary);
+  transform: scale(1.3);
+}
+
