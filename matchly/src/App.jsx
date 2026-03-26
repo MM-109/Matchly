@@ -6,7 +6,9 @@ import Questionnaire from "./pages/Questionnaire";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Offers from "./pages/Offers";
+import ExchangePage from "./pages/ExchangePage";
 import Profile from "./pages/Profile";
+import About from "./pages/About";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -53,10 +55,28 @@ export default function App() {
           />
 
           <Route
+            path="/exchange"
+            element={
+              <ProtectedRoute>
+                <ExchangePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <About />
               </ProtectedRoute>
             }
           />

@@ -50,19 +50,33 @@ export default function Login() {
   };
 
   return (
-    <div className="matches-container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-      <div className="home-content" style={{ marginTop: 0 }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>Matchly</h1>
-        <p className="home-subtitle">Find your perfect connection.</p>
+    <div className="matches-container" style={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      background: '#E1F0FF' // Lightest blue from your palette
+    }}>
+      <div className="home-content" style={{ marginTop: 0, width: '100%' }}>
+        {/* Title in the Deep Gold */}
+        <h1 style={{ fontSize: '3.5rem', marginBottom: '0.5rem', color: '#D4BC8D' }}>Matchly</h1>
+        <p className="home-subtitle" style={{ color: '#8E9AAF' }}>Find your perfect connection.</p>
 
         <div className="home-card-wrapper" style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '2rem' }}>
-          <div className="match-card" style={{ maxWidth: '400px', width: '100%', padding: '2.5rem' }}>
+          <div className="match-card" style={{ 
+            maxWidth: '400px', 
+            width: '100%', 
+            padding: '2.5rem', 
+            background: '#FFFFFF', // Clean white card
+            borderRadius: '24px',
+            boxShadow: '0 10px 30px rgba(194, 203, 229, 0.4)' // Soft Periwinkle shadow
+          }}>
             
-            <h2 style={{ color: 'white', marginBottom: '1.5rem', textAlign: 'center' }}>Welcome</h2>
+            {/* Header in Lavender */}
+            <h2 style={{ color: '#CDC1E5', marginBottom: '1.5rem', textAlign: 'center', fontWeight: '600' }}>Welcome</h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ textAlign: 'left' }}>
-                <label style={{ color: 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '8px', display: 'block' }}>Email Address</label>
+                <label style={{ color: '#A0AEC0', fontSize: '0.8rem', marginBottom: '8px', display: 'block' }}>Email Address</label>
                 <input
                   type="email"
                   placeholder="name@example.com"
@@ -71,16 +85,17 @@ export default function Login() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    borderRadius: '8px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: 'white'
+                    borderRadius: '10px',
+                    background: '#F8F9FF', // Very light tint
+                    border: '1px solid #C2CBE5', // Periwinkle border
+                    color: '#4A5568',
+                    outline: 'none'
                   }}
                 />
               </div>
 
               <div style={{ textAlign: 'left' }}>
-                <label style={{ color: 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '8px', display: 'block' }}>Password</label>
+                <label style={{ color: '#A0AEC0', fontSize: '0.8rem', marginBottom: '8px', display: 'block' }}>Password</label>
                 <input
                   type="password"
                   placeholder="••••••••"
@@ -89,19 +104,50 @@ export default function Login() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    borderRadius: '8px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: 'white'
+                    borderRadius: '10px',
+                    background: '#F8F9FF',
+                    border: '1px solid #C2CBE5',
+                    color: '#4A5568',
+                    outline: 'none'
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '10px' }}>
-                <button className="add-match-btn" onClick={login}>
+                {/* Primary Login Button in Gold */}
+                <button 
+                  className="add-match-btn" 
+                  onClick={login}
+                  style={{
+                    backgroundColor: '#D4BC8D',
+                    color: 'white',
+                    border: 'none',
+                    padding: '14px',
+                    borderRadius: '12px',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
                   Login
                 </button>
-                <button className="logout-btn" style={{ flex: 'none', width: '100%', borderRadius: '12px' }} onClick={register}>
+                {/* Secondary Register Button in Lavender */}
+                <button 
+                  className="logout-btn" 
+                  style={{ 
+                    flex: 'none', 
+                    width: '100%', 
+                    borderRadius: '12px',
+                    backgroundColor: '#CDC1E5',
+                    color: '#5B5470',
+                    border: 'none',
+                    padding: '14px',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }} 
+                  onClick={register}
+                >
                   Register
                 </button>
               </div>
